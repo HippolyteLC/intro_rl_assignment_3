@@ -5,7 +5,7 @@ This contains the following
 
 - Base Deep Q-Learning with epsilon-greedy strategy (done)
 - Approach 1: Adaptive Reward Function Strategy (not done yet)
-- Approach 2: Scrappy Adversial Training (not done yet)
+- Approach 2: Scrappy Adversial Training (implemented)
 - Approach 3: ???
 - Tests for each of the 4 
 And: 
