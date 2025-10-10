@@ -41,8 +41,17 @@ class StratifiedReplayBuffer:
         sample = (state, action, reward, next_state, done)
         if label not in  self.buffer:
             self.buffer[label] = deque()
+            num_labels = len(self.buffer)
+            new_max_buffer_capacity = self.capacity // num_labels
+            remainder = self.capacity % num_labels
+            # dynamically adapt deque max cap as we add sampled pole lengths to our superbuffer. 
+            for i, existing_label in enumerate(self.buffer.keys()):
+                current_maxlen = new_max_buffer_capacity + (1 if i < remainder else 0)        
+                old_deque = self.buffer[existing_label]
+                self.buffer[existing_label] = deque(old_deque, maxlen=current_maxlen) 
+
+
         self.buffer[label].append(sample)
-        self.curr_size += 1
 
     def sample(self, batch_size):
         if not self.buffer:
@@ -64,7 +73,7 @@ class StratifiedReplayBuffer:
     
     def __len__(self):
         return sum(len(d) for d in self.buffer.values())
-
+    
 class AdaptiveCurriculumLearning:
     """ 
     Adaptive curriculum learning offers an object to store the accumulated rewards, 
@@ -372,3 +381,40 @@ def deep_q_learning(epsilon, gamma, alpha, q_network, n_episodes,
     env.close()
     
     return policy_net, target_net, episode_returns, acl, uniform_episode_training_cap
+
+def plot_episode_rewards_averaged(episode_rewards, episode_cap=None, window_size=50):
+    rewards_series = np.array(episode_rewards)
+    
+    weights = np.ones(window_size) / window_size
+    averaged_rewards = np.convolve(rewards_series, weights, mode='valid')
+
+    averaged_episodes = np.arange(window_size, len(episode_rewards) + 1)
+    
+    plt.figure(figsize=(12, 6))
+    
+    plt.plot(averaged_episodes, averaged_rewards, 
+             label=f'Rolling Average (Window = {window_size})', 
+             color='b') 
+    
+    # check we are using acl training
+    if episode_cap > 0 and episode_cap <= len(episode_rewards) and episode_cap is not None:
+        plt.axvline(x=episode_cap, color='r', linestyle='--', 
+                    label=f'Training Shift (Episode {episode_cap})')
+    
+    raw_episodes = range(1, len(episode_rewards) + 1)
+    plt.plot(raw_episodes, episode_rewards, 
+             label='Raw Episode Reward', 
+             color='gray', 
+             alpha=0.3)
+    
+    plt.xlabel('Episode')
+    plt.ylabel(f'Reward (Avg over {window_size} Episodes)')
+    plt.title(f'Episode Reward Rolling Average (Window {window_size})')
+    
+    plt.xlim(0, len(episode_rewards) + 1)
+    
+    plt.legend()
+    plt.grid(True)
+    
+    plt.savefig('averaged_episode_rewards_plot.png')
+    plt.close()
