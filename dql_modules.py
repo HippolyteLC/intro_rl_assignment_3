@@ -272,7 +272,7 @@ def deep_q_learning(epsilon, gamma, alpha, q_network, n_episodes,
     optimizer = optim.Adam(policy_net.parameters(), lr=alpha)
 
     # initialization of replay buffer
-    replay_buffer = ReplayBuffer(buffer_capacity)
+    replay_buffer = StratifiedReplayBuffer(buffer_capacity)
     
     # pole lengths for training
     if pole_lengths is None:
@@ -284,6 +284,8 @@ def deep_q_learning(epsilon, gamma, alpha, q_network, n_episodes,
     # initialize the acl class for adaptive hyperparametre sampling
     if uniform_episode_training_cap is not None:
         acl = AdaptiveCurriculumLearning(pole_lengths)
+    else:
+        acl = None
 
     # copy of current epsilon value for decay
     epsi = epsilon
@@ -291,7 +293,9 @@ def deep_q_learning(epsilon, gamma, alpha, q_network, n_episodes,
     # training loop
     for episode in range(n_episodes):
         # if current episode is below the uniform_episode_training_cap we select from a uniform distr
-        if episode <= uniform_episode_training_cap or uniform_episode_training_cap is None: # or if acl not enabled
+        if uniform_episode_training_cap is None:
+            pole_length = np.random.choice(pole_lengths)
+        elif episode <= uniform_episode_training_cap: # or if acl not enabled
             pole_length = np.random.choice(pole_lengths)
         # else use adaptive probability distrubition 
         else: 
@@ -319,7 +323,7 @@ def deep_q_learning(epsilon, gamma, alpha, q_network, n_episodes,
             done = terminated or truncated
 
             # store transition in replay buffer
-            replay_buffer.push(state, action, reward, next_state, float(done))
+            replay_buffer.push(pole_length, state, action, reward, next_state, float(done))
 
             # deep q learning update (using mini-batch from replay buffer)
             if len(replay_buffer) >= batch_size:
@@ -364,11 +368,12 @@ def deep_q_learning(epsilon, gamma, alpha, q_network, n_episodes,
         
         # update acl for rewards, performance metrics, scores, and probs
         # difficulty scores and probabilities are global updates, can be seen in the respective update methods
-        acl.update_rewards(pole_length, episode_reward)
-        if episode >= uniform_episode_training_cap:
-            acl.update_performances(pole_length)
-            acl.update_difficulties()
-            acl.update_distribution()
+        if uniform_episode_training_cap is not None:
+            acl.update_rewards(pole_length, episode_reward)
+            if episode >= uniform_episode_training_cap:
+                acl.update_performances(pole_length)
+                acl.update_difficulties()
+                acl.update_distribution()
 
         #only for seeing the progress
         if episode % 100 == 0:
