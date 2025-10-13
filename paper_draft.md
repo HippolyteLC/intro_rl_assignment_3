@@ -14,9 +14,10 @@ The goal is to train an agent such that it can perform well in altering conditio
 
 - insert the algorithm  for DQN (loss, update functions, etc.)
 - add cartpole env specificities, concise
-- add replay buffer 
+- add replay buffer
+- ADD PARAMETRES AND REASONING FOR THEIR VALUES
 
-
+# MAIN IDEA (HOW DO WE TRAIN ON POEL LENGTHS ???, ALL RQS TIE INTO THIS MAKE THE STORY FLOW)
 
 # Algorithms (strategies)
 
@@ -27,9 +28,14 @@ We implement a stratified replay buffer as an extension of the replay buffer. Th
 - add our specific sample format
 - should the sampling have a refill also (tbd, currently we do not refill so we might be sampling under the limit quite often)
 
-**strategy: least visited curriculum**
+**Adaptive Performance Curriculum**
+The adaptive performance curriculum is our first iteration of the Curriculum learning approach. As the agent has to be generalizable, it follows that accumulating experiences in all environment configuratoins will allow the agent to learn from a generalized set of experiences. In this implementation we sequence our source tasks based on performance. The worst performing pole lengths are prioritized in the sequence of learning, such that the agent can attack its weak spots actively as it learns the task. We specify a performance metric for each episode trained on a certain length, so that we can store for each pole length how we've performed so far. 
 
-**strategy: worst performing curriculum**
+- performance metric formula
+- difficulty score
+- prob_distr
+
+**Adatpive Frequency Curriculum**
 
 # references
 
