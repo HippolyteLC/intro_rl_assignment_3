@@ -21,10 +21,11 @@ The goal is to train an agent such that it can perform well in altering conditio
 # Algorithms (strategies)
 
 **Stratified replay buffer** 
-We oimplement a stratified replay buffer as an extension of the replay buffer. This is an implementation of PER. We save experiences as quintuples where we now also store the pole length associated with an experience. After accumulating sufficient experiences to sample from the replay buffer, we ensure that we sample evenly from all experiences. The idea here is that uniform sampling evenly from experiences for every experienced pole length up until a given training episode will ensure the agent is continuously learning from experiences at each altered training condition. The 
+We implement a stratified replay buffer as an extension of the replay buffer. This is an implementation of PER. We save experiences as quintuples where we now also store the pole length associated with an experience. After accumulating sufficient experiences to sample from the replay buffer, we ensure that we sample evenly from all experiences. The idea here is that uniform sampling evenly from experiences for every experienced pole length up until a given training episode will ensure the agent is continuously learning from experiences at each altered training condition. The main alteratino we made to our replay buffer was the sampling. When we sample from the replay buffer we compute the samples per pole length we want to sample. If insufficient samples are available, we sample the whole sub buffer that belongs to a given pole length. The sampling within each sub buffer is done using a uniform distribution. 
 
 - add the pseudocode? or concise description
-- - add our specific sample format 
+- add our specific sample format
+- should the sampling have a refill also (tbd, currently we do not refill so we might be sampling under the limit quite often)
 
 **strategy: least visited curriculum**
 
