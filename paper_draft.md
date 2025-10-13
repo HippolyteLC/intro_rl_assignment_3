@@ -10,6 +10,7 @@ We implement prioritized experience replay in ...
 
 # The Setup 
 We deploy a Deep Q Network (DQN) that uses e-learning to tackle the problem of a generalizable cartpole agent. The states in the cartpole env consist of the cart velocity, the cart position (x), the pole angle, and the pole angular velocity. At each time step the agent can choose to move left or right (2-dim aqction space). DQN is used in tasks where the state/action space is too vast to attemtp tabular learning. Q-learning is a suitable approach in the cartpole learning task. DQN utilizes a replay buffer to learn from past and potentially rare experiences. 
+The goal is to train an agent such that it can perform well in altering conditions. The conditions that are altered are the pole lengths, wind attacks, and increased horizontal push forces. We aim to achieve optimal performance in these conditions by only altering the pole lkengths that our agent will train with. 
 
 - insert the algorithm  for DQN (loss, update functions, etc.)
 - add cartpole env specificities, concise
@@ -20,8 +21,10 @@ We deploy a Deep Q Network (DQN) that uses e-learning to tackle the problem of a
 # Algorithms (strategies)
 
 **Stratified replay buffer** 
+We oimplement a stratified replay buffer as an extension of the replay buffer. This is an implementation of PER. We save experiences as quintuples where we now also store the pole length associated with an experience. After accumulating sufficient experiences to sample from the replay buffer, we ensure that we sample evenly from all experiences. The idea here is that uniform sampling evenly from experiences for every experienced pole length up until a given training episode will ensure the agent is continuously learning from experiences at each altered training condition. The 
 
-
+- add the pseudocode? or concise description
+- - add our specific sample format 
 
 **strategy: least visited curriculum**
 
