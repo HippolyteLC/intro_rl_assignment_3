@@ -1,16 +1,27 @@
+
 # literature
 
 **curriculum learning** 
-Curriculum learning falls inthe domain of transfer learning. Trabnsfer learning is the learning of an agent on a source task to then transition the learned policy, reward function, or model  in the target task. Curriculum learning is the automatic sequencding of source tasks in such a way that an agent can have better performance on a target task; here increased learning speed and performance is the goal {narvekar2016source} {narvekar2017autonomous}. Given the domain of the problem, a subset of learning tasks (source tasks) can be defined for the agent to train on. Randomized curriculum learning, i.e. a curriculum where source tasks are assigned randomly without any given heuristic can delay convergence by adding redundant tasks in the learning sequence {narvekar2017autonomous}. 
+Curriculum learning falls in the domain of transfer learning. Trabnsfer learning is the learning of an agent on a source task to then transition the learned policy, reward function, or model  in the target task. Curriculum learning is the automatic sequencding of source tasks in such a way that an agent can have better performance on a target task; here increased learning speed and performance is the goal {narvekar2016source} {narvekar2017autonomous}. Given the domain of the problem, a subset of learning tasks (source tasks) can be defined for the agent to train on. Randomized curriculum learning, i.e. a curriculum where source tasks are assigned randomly without any given heuristic can delay convergence by adding redundant tasks in the learning sequence {narvekar2017autonomous}. 
 
 **Prioritized Experience Replay** 
 Experience replayes allows an agent to reuse rare and useful prior experiences instead of learning from a given state transition once {lin1992self}. An experience is often denoted as a quadruple (st,a,r,s'). The agent selects an action a in a current state s for which it obtains reward r and transitions to the next state s'. Prioritized experience replay emphasies this further, by selecting which experiences to learn from based on how valuable that experience is in the context of the task. This extended method of experience replay can speed up the learning process of the agent (by a factor of 2) {schaul2015prioritized}. 
+We implement prioritized experience replay in ... 
+
+# The Setup 
+We deploy a Deep Q Network (DQN) that uses e-learning to tackle the problem of a generalizable cartpole agent. The states in the cartpole env consist of the cart velocity, the cart position (x), the pole angle, and the pole angular velocity. At each time step the agent can choose to move left or right (2-dim aqction space). DQN is used in tasks where the state/action space is too vast to attemtp tabular learning. Q-learning is a suitable approach in the cartpole learning task. DQN utilizes a replay buffer to learn from past and potentially rare experiences. 
+
+- insert the algorithm  for DQN (loss, update functions, etc.)
+- add cartpole env specificities, concise
+- add replay buffer 
 
 
 
+# Algorithms (strategies)
+
+**Stratified replay buffer** 
 
 
-**strategy: strati replay buffer**
 
 **strategy: least visited curriculum**
 
