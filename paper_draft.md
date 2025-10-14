@@ -16,8 +16,15 @@ The goal is to train an agent such that it can perform well in altering conditio
 - add cartpole env specificities, concise
 - add replay buffer
 - ADD PARAMETRES AND REASONING FOR THEIR VALUES
+per_params are based off of the Schaul et al., 2016  paper {schaul2015prioritized}
+batch size params from a 2017 study on optimal batch size tested in the cartpole env {choi2017empirical}
+gamma values are taken from the original dqn model paper (atari deep mind paper) {mnih2015human} 
 
 # MAIN IDEA (HOW DO WE TRAIN ON POEL LENGTHS ???, ALL RQS TIE INTO THIS MAKE THE STORY FLOW)
+- research objective needs to be clear, i.e. exploring 
+- 
+
+
 
 # Algorithms (strategies)
 
@@ -71,4 +78,24 @@ The adaptive performance curriculum is our first iteration of the Curriculum lea
   booktitle={IJCAI},
   pages={2536--2542},
   year={2017}
+}
+
+@inproceedings{choi2017empirical,
+  title={An empirical study on the optimal batch size for the deep q-network},
+  author={Choi, Minsuk},
+  booktitle={International Conference on Robot Intelligence Technology and Applications},
+  pages={73--81},
+  year={2017},
+  organization={Springer}
+}
+
+@article{mnih2015human,
+  title={Human-level control through deep reinforcement learning},
+  author={Mnih, Volodymyr and Kavukcuoglu, Koray and Silver, David and Rusu, Andrei A and Veness, Joel and Bellemare, Marc G and Graves, Alex and Riedmiller, Martin and Fidjeland, Andreas K and Ostrovski, Georg and others},
+  journal={nature},
+  volume={518},
+  number={7540},
+  pages={529--533},
+  year={2015},
+  publisher={Nature Publishing Group}
 }
