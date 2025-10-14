@@ -9,7 +9,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
-
+ 
 # This is the 'standard' neural network
 class QNetwork(nn.Module):
     def __init__(self, state_dim, action_dim):
@@ -82,7 +82,7 @@ def test_pole_length(env, q_network):
 
 
 
-def test_script():
+def test_script(weights_path=None):
     """
     Function that simulates the trained NN over 30 different pole lengths, 10 times per length.
     """
@@ -91,7 +91,8 @@ def test_script():
     all_results = []
 
     # import here your trained neural network
-    trained_nn = 'path_to_your_nn.pth'
+    if weights_path is None:
+        weights_path = 'weights/baseline_policy.pth'
 
     results = {}
     total_score = 0
@@ -109,7 +110,7 @@ def test_script():
             state_dim = env.observation_space.shape[0]
             action_dim = env.action_space.n
             loaded_model = QNetwork(state_dim, action_dim)
-            loaded_model.load_state_dict(torch.load("weights/" + trained_nn, weights_only=True))
+            loaded_model.load_state_dict(torch.load( weights_path, weights_only=True))
 
             # Switch to evaluation mode
             loaded_model.eval()  # Use for inference
