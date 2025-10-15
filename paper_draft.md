@@ -1,3 +1,5 @@
+## PDF OUTSIDE ZIP MAYBE? 
+
 
 # literature
 
@@ -19,7 +21,23 @@ The goal is to train an agent such that it can perform well in altering conditio
 - ADD PARAMETRES AND REASONING FOR THEIR VALUES
 per_params are based off of the Schaul et al., 2016  paper {schaul2015prioritized}
 batch size params from a 2017 study on optimal batch size tested in the cartpole env {choi2017empirical}
-gamma values are taken from the original dqn model paper (atari deep mind paper) {mnih2015human} 
+gamma values are taken from the original dqn model paper (atari deep mind paper) {mnih2015human}
+
+# HERE ARE THE TRAINING PARAMS FOR OUR MODELS 
+training parametres for the sub 1000 performances (the stable ones):
+- epsilon = 0.1
+- no decay
+- 2000 training steps
+- batch size 64
+- gamma=0.99 
+- alpha=1e-3
+- uniform training cap = 1500
+- update weights every 4 actions
+- update target net every 1000 actions (actions is the count variable incrementing)
+- 30 pole lengths
+- 50k buffer capacity
+- 
+
 
 # MAIN IDEA (HOW DO WE TRAIN ON POEL LENGTHS ???, ALL RQS TIE INTO THIS MAKE THE STORY FLOW)
 - research objective needs to be clear, i.e. exploring 
