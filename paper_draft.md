@@ -1,6 +1,7 @@
 
 # literature
 
+
 **curriculum learning** 
 Curriculum learning falls in the domain of transfer learning. Trabnsfer learning is the learning of an agent on a source task to then transition the learned policy, reward function, or model  in the target task. Curriculum learning is the automatic sequencding of source tasks in such a way that an agent can have better performance on a target task; here increased learning speed and performance is the goal {narvekar2016source} {narvekar2017autonomous}. Given the domain of the problem, a subset of learning tasks (source tasks) can be defined for the agent to train on. Randomized curriculum learning, i.e. a curriculum where source tasks are assigned randomly without any given heuristic can delay convergence by adding redundant tasks in the learning sequence {narvekar2017autonomous}. 
 
