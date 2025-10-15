@@ -13,12 +13,14 @@ information presented.
 
 ACL 
 To promote generalization across varying environmental configurations, we employ an ACL framework. The ACL algorithm uses an object to store pole length rewards, performances, difficulty scores, and a probability distribution for sampling. We set a training cap at t=1500 where t is the 1500th episode. Up until t the agent uses the baseline method of pole length sampling which is where pole lengths are sampled from a discrete uniform distribution. After then t-th episode the agent starts prioriziting the worst performing pole lengths. Performance is judged based on mean reward per episode. We use a look back window parametre LOOK_BACK_WINDOW = 20. This ensures we only consider the recent rewards when computing the performance of a pole length and avoids over stabilizing of performances in our sampling. The ACL algorithm also has an adaptive probability p=0.9 of sampling uniformly from the discrete distribution of pole lengths. 
+Performance = mean(rewards[-LOOK_BACK_WINDOW:])
+Difficulty
 
 EDC
 
 
 PER
-
+PER selects past experiences stored in the replay buffer with more bias toward experiences that caused large transition errors. TD errors. 
 
 General Training Setup
 
