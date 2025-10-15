@@ -1,11 +1,21 @@
 # Introduction
-motivation for our research
-
   
 Deep Q learning is a powerful reinforcement learning algorithm used in many studies to solve problems where the state space is extremely vast or continuous; too large for tabular learning {mnih2015human}. This study will utilize the DQL algorithm to play the cartpole game from OpenAI's Gym environment. The state space of cartpole is continuous, therefore the application of DQL for this problem is suitable. Alongside a vanilla implementation of DQL, our baseline, we will also implement three alternate strategies for training our DQL algorithm. We evaluate our policy based on its generalized performance in changing environmental conditions. We constrain our training to only be able to modify the pole lengths the agent is learning from. 
-Our goal here is to study the impact of pole length training sequencing in the setup and the replay buffer. The two main ideas are: researching different source task sequences and targeted sampling of the replay buffer based on performance. The latter is implicitly linked to pole length performance. To achieve the former we implement two different learning curriculums. Curriculum Learning (CL) is a form of transfer learning where an agent is training on a source task and transitions this learned experience to a target task. CL is the automatic sequencing of these source tasks to improve learning speed and final performance {narvekar2016source} {narvekar2017autonomous}. Given the domain of our problem we select a subset of learning tasks to achieve a generalized agent. The first strategy utilizes an Adaptive Curriculum Learning (ACL) schema that prioritizes weakest performing pole lengths in the training sequencing. The second strategy utilizes an Exploration Diversity Curriculum (EDC) that prioritizes least visited pole lengths in the training sequencing. Lastly, we implement a Prioritized Experience Replay (PER) strategy to sample past transitions (experiences) where a greater Temporal Difference (TD) error was committed {schaul2015prioritized}. Pole length episodes where large errors are committed in the transitions are sampled with greater probability. This implicitly focuses on weak performing pole lengths. 
+Our goal here is to study the impact of pole length training sequencing in the setup and the replay buffer. The two main ideas are: researching different source task sequencinug and targeted sampling of the replay buffer based on performance. The latter is implicitly linked to pole length performance. To achieve the former we implement two different learning curriculums. Curriculum Learning (CL) is a form of transfer learning where an agent is training on a source task and transitions this learned experience to a target task. CL is the automatic sequencing of these source tasks to improve learning speed and final performance {narvekar2016source} {narvekar2017autonomous}. Given the domain of our problem we select a subset of learning tasks to achieve a generalized agent. The first strategy utilizes an Adaptive Curriculum Learning (ACL) schema that prioritizes weakest performing pole lengths in the training sequencing. The second strategy utilizes an Exploration Diversity Curriculum (EDC) that prioritizes least visited pole lengths in the training sequencing. Lastly, we implement a Prioritized Experience Replay (PER) strategy to sample past transitions (experiences) where a greater Temporal Difference (TD) error was committed {schaul2015prioritized}. Pole length episodes where large errors are committed in the transitions are sampled with greater probability. This implicitly focuses on weak performing pole lengths. 
 
 We investigate the following research questions: 
+
+# Method
+
+Methods: explain your different approaches and its motivation, parameter set-
+tings, experimental setup , etc. Make sure everything is reproducible with the
+information presented.
+
+ACL 
+We use ACL as we want to achieve a generalized agent. With this in mind we want to train weaker performing pole lengths more toward the end of the training cycle. The ACL algorithm uses an object to store pole length rewards, performances, difficulty scores, and a probability distribution for sampling. We set a training cap at t=1500 where t is an episode. Up until t the agent uses the baseline method of pole length sampling which is where pole lengths are sampled from a discrete uniform distribution. After t the agent starts prioriziting the worst performing pole lengths. Performance is judged based on mean reward per episode. We use a look back window parametre LOOK_BACK_WINDOW = 20. This ensures we only consider the recent performances of a pole length and avoids over stabilizing of performances in our sampling. 
+
+
+
 
 
 
@@ -14,7 +24,7 @@ We investigate the following research questions:
 Curriculum learning falls in the domain of transfer learning. Trabnsfer learning is the learning of an agent on a source task to then transition the learned policy, reward function, or model  in the target task. Curriculum learning is the automatic sequencding of source tasks in such a way that an agent can have better performance on a target task; here increased learning speed and performance is the goal {narvekar2016source} {narvekar2017autonomous}. Given the domain of the problem, a subset of learning tasks (source tasks) can be defined for the agent to train on. Randomized curriculum learning, i.e. a curriculum where source tasks are assigned randomly without any given heuristic can delay convergence by adding redundant tasks in the learning sequence {narvekar2017autonomous}. 
 
 The goal we aim to achieve is to study the impact of training with different pole length sequences and policy performance on weakest poel lengths. 
-We will research the effect of pole length 
+We will research the effect of pole length sequencing 
 
 
 
