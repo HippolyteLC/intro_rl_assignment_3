@@ -12,10 +12,15 @@ tings, experimental setup , etc. Make sure everything is reproducible with the
 information presented.
 
 ACL 
-We use ACL as we want to achieve a generalized agent. With this in mind we want to train weaker performing pole lengths more toward the end of the training cycle. The ACL algorithm uses an object to store pole length rewards, performances, difficulty scores, and a probability distribution for sampling. We set a training cap at t=1500 where t is an episode. Up until t the agent uses the baseline method of pole length sampling which is where pole lengths are sampled from a discrete uniform distribution. After t the agent starts prioriziting the worst performing pole lengths. Performance is judged based on mean reward per episode. We use a look back window parametre LOOK_BACK_WINDOW = 20. This ensures we only consider the recent performances of a pole length and avoids over stabilizing of performances in our sampling. 
+To promote generalization across varying environmental configurations, we employ an ACL framework. The ACL algorithm uses an object to store pole length rewards, performances, difficulty scores, and a probability distribution for sampling. We set a training cap at t=1500 where t is the 1500th episode. Up until t the agent uses the baseline method of pole length sampling which is where pole lengths are sampled from a discrete uniform distribution. After then t-th episode the agent starts prioriziting the worst performing pole lengths. Performance is judged based on mean reward per episode. We use a look back window parametre LOOK_BACK_WINDOW = 20. This ensures we only consider the recent rewards when computing the performance of a pole length and avoids over stabilizing of performances in our sampling. The ACL algorithm also has an adaptive probability p=0.9 of sampling uniformly from the discrete distribution of pole lengths. 
+
+EDC
 
 
+PER
 
+
+General Training Setup
 
 
 
