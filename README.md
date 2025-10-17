@@ -1,8 +1,6 @@
 # intro_rl_assignment_3
 github repo for assignment 3 (introduction to reinforcement learning)
 
-For the paper
-
 The main implementations used in our research paper are present in the version_2_strategies ipynb file 
 It contains: 
 - the strategies
@@ -39,7 +37,6 @@ To run you need to:
 - pip install pandas
 - pip install matplotlib
 - pip install scipy
-- pip install 
 
 Statistical tests:
 
