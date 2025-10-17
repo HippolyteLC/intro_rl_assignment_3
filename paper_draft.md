@@ -160,3 +160,12 @@ The adaptive performance curriculum is our first iteration of the Curriculum lea
   year={2015},
   publisher={Nature Publishing Group}
 }
+
+@inproceedings{kong2021adaptive,
+  title={Adaptive Curriculum Learning},
+  author={Kong, Yajing and Liu, Liu and Wang, Jun and Tao, Dacheng},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  year={2021},
+  pages={5067--5076},
+  organization={IEEE}
+}
