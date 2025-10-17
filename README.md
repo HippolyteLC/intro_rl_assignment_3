@@ -1,23 +1,45 @@
 # intro_rl_assignment_3
 github repo for assignment 3 (introduction to reinforcement learning)
 
-This contains the following
+For the paper
+
+The main implementations used in our research paper are present in the version_2_strategies ipynb file 
+It contains: 
+- the strategies
+- the trainings
+- the testing
+- data saving
+
+The main stat testing used in the paper is done in the metrics.ipynb file
+It contains:
+- Mann-Whitney U test
+- F-test
+
+The weights are contained in the trained_nn_version_2 folder as pth files
+
+Graphs used in the paper are present in the graphs folder
+
+Alternate files contain prior implementations, weights of these, generalized testing and statistical testing. 
+
+The whole repo contains the following
 
 - Baseline:   Deep Q-Learning with epsilon-greedy strategy (done)
-- Approach 3: Scrappy Adversial Training/ Exploration Diversity Curriculum Learning - pole length frequency (implemented)
-- Approach 2: Scrappy Adversial Training/ Adaptive Curriculum Learning - pole length performance (implemented)
-- Approach 1: Prioritized Experience Replay - sampling strategy for Replay Buffer (not yet implemented)
+- Approach 1: Exploration Diversity Curriculum Learning - pole length frequency (implemented)
+- Approach 2: Adaptive Curriculum Learning - pole length performance (implemented)
+- Approach 3: Prioritized Experience Replay - sampling strategy for Replay Buffer (implemented)
 
-- Tests for each of the 4 
+- Tests for each of the 4 implementations
 And: 
-- Comparison of the 3 approaches
+- Comparison of the 3 approaches vs baseline
 
 To run you need to:
 - pip install torch
 - pip install numpy
 - pip install gymnasium
 - pip install pandas
-- pip install matplotlib 
+- pip install matplotlib
+- pip install scipy
+- pip install 
 
 Statistical tests:
 
